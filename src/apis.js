@@ -92,7 +92,8 @@ export const readBooks = ({ auth }) => {
     })
         .then(response => {
             console.log("Fetch Book Response: ", response)
-            return response.data.length ? response.data : []
+            // return response.data.length ? response.data : []
+            return response.data
         })
         .catch(error => {
         console.log("Fetch Book Error: ", error)
@@ -117,7 +118,7 @@ export const updateBook = ({ auth, id, book }) => {
 };
 
 export const deleteBook = ({ auth, id }) => {
-  axios({
+  return axios({
     method: "delete",
     url: `${baseURL}/books/${id}`,
     headers: {

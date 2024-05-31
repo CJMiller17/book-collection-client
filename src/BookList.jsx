@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react"
 import { AuthContext } from "./authContext"
 import { readBooks, deleteBook } from "./apis"
+import "./App.css"
 
 const BookList = () => {
     const { auth } = useContext(AuthContext)
@@ -20,22 +21,27 @@ const BookList = () => {
             .then(() => {
                 setBooks(books.filter(book => book.id !== bookId))
             })
-        .catch(error => console.log("Error deleting book: ", error))
+            .catch(error => console.log("Error deleting book: ", error))
     }
+    console.log(books)
 
-    return (
-        <div>
-            <h1>Book List</h1>
-            <ul>
-                {books.map(book => (
-                    <li key={book.id}>
-                        {book.title}
-                        <button onClick={() => handleDelete(book.id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    )
+    if (books.length <= 0) {
+        return <>Loading</>
+    } else {
+        return (
+            <div className="bookList">
+                <h1>Book List</h1>
+                <ul>
+                    {books.map(book => (
+                        <li key={book.id}>
+                            "{book.title}" by {book.author}
+                            <button className="button" onClick={() => handleDelete(book.id)}>Delete</button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
 }
 
 export default BookList

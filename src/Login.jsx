@@ -1,7 +1,8 @@
 import { useContext, useState } from "react"
 import { AuthContext } from "./authContext"
 import { getToken } from "./apis"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+
 
 function Login() {
   const { auth } = useContext(AuthContext);
@@ -35,7 +36,12 @@ function Login() {
       </div>
 
       <div style={{ marginTop: 20 }}>
-        <button onClick={() => submit()}>Submit</button>
+        <button className="click" onClick={() => submit()}>Submit</button>
+      </div>
+      <div style={{ marginTop: 20 }}>
+        <Link to="/createUser">
+          <button className="click" >Create User</button>
+        </Link>
       </div>
     </div>
   );
