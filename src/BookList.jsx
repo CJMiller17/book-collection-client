@@ -8,7 +8,10 @@ const BookList = () => {
 
     useEffect(() => {
         readBooks({ auth })
-            .then(data => setBooks(data))
+            .then(data => {
+                console.log("Data: ", data)
+                setBooks(data)
+            })
             .catch(error => console.log("Error reading books: ", error))
     }, [auth])
 

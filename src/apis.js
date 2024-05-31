@@ -92,7 +92,7 @@ export const readBooks = ({ auth }) => {
     })
         .then(response => {
             console.log("Fetch Book Response: ", response)
-            response.data
+            return response.data.length ? response.data : []
         })
         .catch(error => {
         console.log("Fetch Book Error: ", error)

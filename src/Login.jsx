@@ -4,16 +4,15 @@ import { getToken } from "./apis"
 import { useNavigate } from "react-router-dom"
 
 function Login() {
-  const { auth, setAuth } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
 
   const submit = () => {
-      getToken({ username, password })
+      getToken({ auth, username, password })
           .then((data) => {
             console.log("AccessToken: ", data.access)
-            setAuth({ ...auth, accessToken: data.access })
                 console.log("Why no workie?")
                 navigate("/books")
               })
