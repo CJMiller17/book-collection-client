@@ -1,23 +1,23 @@
 import { useContext, useEffect } from "react"
 import { AuthContext } from "./authContext"
 import { readUser } from "./apis"
-// import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 
 function App() {
   const { auth } = useContext(AuthContext)
-  // const navigate = useNavigate()
-  const submit = () => {
-    readUser({ auth })
-  }
+  const navigate = useNavigate()
 
-  
-  // useEffect(() => {
-  //   if (auth.accessToken === undefined) {
-  //     console.log('redirecting')
-  //     navigate('/login')
-  //   }
-  // }, [auth.accessToken, navigate])
+  useEffect(() => {
+    if (!auth.accessToken) {
+      console.log('redirecting')
+      navigate('/login')
+    }
+  }, [auth.accessToken, navigate])
+
+    const submit = () => {
+      readUser({ auth });
+    };
 
   return (
     <div className="p-5">

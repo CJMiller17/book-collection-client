@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
-import { useState } from "react"
+// import { useState } from "react"
 import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
@@ -17,7 +17,7 @@ import Login from "./Login"
 import Header from "./Header"
 import Footer from "./Footer"
 import ErrorPage from "./ErrorPage"
-import { AuthContext } from "./authContext"
+import { AuthProvider } from "./authContext"
 import CreateUser from "./CreateUser"
 import ProtectedRoute from "./ProtectedRoute"
 import BookList from "./BookList"
@@ -77,24 +77,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-const AuthContextProvider = ({ children }) => {       // Why is children in red??
-  const [accessToken, setAccessToken] = useState(undefined)
-
-  const auth = {
-    accessToken,
-    setAccessToken,
-  }
-
-  return (
-    <AuthContext.Provider value={{ auth: auth }} >
-      {children}
-    </AuthContext.Provider>
-  )
-}
-
-
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <AuthContextProvider>
+  <AuthProvider>
     <RouterProvider router={router} />
-  </AuthContextProvider>
+  </AuthProvider>
 )
